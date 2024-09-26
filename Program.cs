@@ -1,12 +1,15 @@
 ﻿using AutoSale.Model;
 using MySql.Data.MySqlClient;
+using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 
 namespace AutoSale
 {
@@ -57,7 +60,7 @@ namespace AutoSale
             Console.WriteLine("Kerem az auto gyartasi evet");
             ev = Convert.ToInt32(Console.ReadLine());
 
-            string sql = $"INSERT INTO `cars`(`Brand`, `Type`, `License`, `Date`) VALUES (,'{marka}','{tipus}','{azon}','{ev})";
+            string sql = $"INSERT INTO `cars`(`Brand`, `Type`, `License`, `Date`) VALUES('{marka}', '{tipus}', '{azon}', '{ev}')";
             conn.Connection.Open();
 
             MySqlCommand mySqlCommand = new MySqlCommand(sql, conn.Connection);
