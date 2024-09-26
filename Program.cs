@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -38,6 +39,32 @@ namespace AutoSale
 
             conn.Connection.Close();
         }
+
+        public static void feladat2() 
+        {
+            string marka, tipus, azon;
+            int ev;
+
+            Console.WriteLine("Kerem az auto markajat");
+            marka = Console.ReadLine();
+
+            Console.WriteLine("Kerem az auto tipusat");
+            tipus = Console.ReadLine();
+
+            Console.WriteLine("Kerem az auto azonositojat");
+            azon = Console.ReadLine();
+
+            Console.WriteLine("Kerem az auto gyartasi evet");
+            ev = Convert.ToInt32(Console.ReadLine());
+
+            string sql = $"INSERT INTO `cars`(`Brand`, `Type`, `License`, `Date`) VALUES (,'{marka}','{tipus}','{azon}','{ev})";
+            conn.Connection.Open();
+
+            MySqlCommand mySqlCommand = new MySqlCommand(sql, conn.Connection);
+            mySqlCommand.ExecuteNonQuery();
+
+            conn.Connection.Close();
+        }
         static void Main(string[] args)
         {
             feladat1();
@@ -45,6 +72,7 @@ namespace AutoSale
             {
                 Console.WriteLine($"Marka: {item.Brand}, Azonosito: {item.License}");
             }
+            feladat2();
             Console.ReadLine();
         }
     }
