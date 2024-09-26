@@ -86,6 +86,19 @@ namespace AutoSale
 
             conn.Connection.Close();
         }
+        public static void feladat4()
+        {
+            int id;
+
+            Console.WriteLine("Adja meg melyik sort toroljem ki");
+            id = Convert.ToInt32(Console.ReadLine());
+
+            conn.Connection.Open();
+            string sql = $"DELETE FROM `cars` WHERE `Id` = {id}";
+            MySqlCommand mySqlCommand = new MySqlCommand(sql, conn.Connection);
+            mySqlCommand.ExecuteNonQuery();
+            conn.Connection.Close();
+        }
         static void Main(string[] args)
         {
             feladat1();
@@ -95,6 +108,7 @@ namespace AutoSale
             }
             feladat2();
             feladat3();
+            feladat4();
             Console.ReadLine();
         }
     }
