@@ -26,6 +26,7 @@ namespace AutoSale
             ConnectionString = "SERVER=" + Host + ";DATABASE=" + Database + ";UID=" + Username + ";PASSWORD=" + Password + ";SslMode=None";
 
             Connection = new MySqlConnection(ConnectionString);
+
         }
     }
 }
