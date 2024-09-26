@@ -4,6 +4,7 @@ using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -99,6 +100,32 @@ namespace AutoSale
             mySqlCommand.ExecuteNonQuery();
             conn.Connection.Close();
         }
+        public static void feladat5()
+        {
+            int id;
+            Console.WriteLine("Adja meg az auto ID-jat");
+            id = Convert.ToInt32(Console.ReadLine());
+
+            conn.Connection.Open();
+            string sql = $"SELECT `Id`, `Brand`, `Type`, `License`, `Date` FROM `cars` WHERE `Id` = {id}";
+            MySqlCommand mySqlCommand = new MySqlCommand(sql, conn.Connection);
+
+            MySqlDataReader myDataReader = mySqlCommand.ExecuteReader();
+            if (myDataReader.Read())
+            {
+                Console.WriteLine($"ID: {myDataReader["Id"]}");
+                Console.WriteLine($"Brand: {myDataReader["Brand"]}");
+                Console.WriteLine($"Type: {myDataReader["Type"]}");
+                Console.WriteLine($"License: {myDataReader["License"]}");
+                Console.WriteLine($"Date: {myDataReader["Date"]}");
+            }   
+            else
+            {
+                Console.WriteLine("No car found with the given ID.");
+            }
+
+            conn.Connection.Close();
+        }
         static void Main(string[] args)
         {
             feladat1();
@@ -109,6 +136,7 @@ namespace AutoSale
             feladat2();
             feladat3();
             feladat4();
+            feladat5();
             Console.ReadLine();
         }
     }
